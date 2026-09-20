@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TecnoShop - Galería</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+
+        header {
+            background-color: #17202a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        nav {
+            background-color: #273746;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        .galeria {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .galeria h2 {
+            font-size: 36px;
+            color: #17202a;
+        }
+
+        /* CARRUSEL */
+
+        .carrusel {
+            width: 80%;
+            max-width: 900px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px #999;
+        }
+
+        .imagen {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: none;
+        }
+
+        .imagen.activa {
+            display: block;
+        }
+
+        /* BOTONES */
+
+        .anterior,
+        .siguiente {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .anterior {
+            left: 10px;
+        }
+
+        .siguiente {
+            right: 10px;
+        }
+
+        .anterior:hover,
+        .siguiente:hover {
+            background-color: #007bff;
+        }
+
+        /* PUNTOS */
+
+        .puntos {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .punto {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .punto.activo {
+            background-color: #007bff;
+        }
+
+        footer {
+            background-color: #17202a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>💻 Tienda de tecnologia</h1>
+
+        <p>Equipos tecnológicos de calidad</p>
+
+    </header>
+
+
+    <nav>
+
+        <a href="index.html">Inicio</a>
+
+        <a href="productos.html">Productos</a>
+
+        <a href="galeria.html">Galería</a>
+
+        <a href="index.html#contacto">Contacto</a>
+
+    </nav>
+
+
+    <section class="galeria">
+
+        <h2>Galería de Tecnología</h2>
+
+        <p>Conoce algunos de nuestros productos tecnológicos</p>
+
+
+        <div class="carrusel">
+
+            <img
+                class="imagen activa"
+                src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=1200&q=80"
+                alt="Laptop">
+
+            <img
+                class="imagen"
+                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80"
+                alt="Smartphone">
+
+            <img
+                class="imagen"
+                src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=1200&q=80"
+                alt="Computadora">
+
+            <button class="anterior" onclick="cambiarImagen(-1)">
+                ❮
+            </button>
+
+            <button class="siguiente" onclick="cambiarImagen(1)">
+                ❯
+            </button>
+
+        </div>
+
+
+        <div class="puntos">
+
+            <span class="punto activo" onclick="mostrarImagen(0)"></span>
+
+            <span class="punto" onclick="mostrarImagen(1)"></span>
+
+            <span class="punto" onclick="mostrarImagen(2)"></span>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>Derechos reservados - Mollo Choque Juan Angelo</p>
+
+        <p>📍 Oruro, Bolivia</p>
+
+    </footer>
+
+
+    <script>
+
+        let indice = 0;
+
+        let imagenes = document.querySelectorAll(".imagen");
+
+        let puntos = document.querySelectorAll(".punto");
+
+
+        function mostrarImagen(numero) {
+
+            imagenes.forEach(function(imagen) {
+                imagen.classList.remove("activa");
+            });
+
+            puntos.forEach(function(punto) {
+                punto.classList.remove("activo");
+            });
+
+            imagenes[numero].classList.add("activa");
+
+            puntos[numero].classList.add("activo");
+
+            indice = numero;
+        }
+
+
+        function cambiarImagen(direccion) {
+
+            indice = indice + direccion;
+
+            if (indice >= imagenes.length) {
+                indice = 0;
+            }
+
+            if (indice < 0) {
+                indice = imagenes.length - 1;
+            }
+
+            mostrarImagen(indice);
+
+        }
+
+
+        /* Cambio automático cada 4 segundos */
+
+        setInterval(function() {
+
+            cambiarImagen(1);
+
+        }, 4000);
+
+    </script>
+
+</body>
+
+</html>
